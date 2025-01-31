@@ -66,6 +66,7 @@
 .chatbot {
   padding: 8rem 0;
   background: rgba(255, 255, 255, 0.02);
+  margin-top: 50px;
 }
 
 .chat-window {
