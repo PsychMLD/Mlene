@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.0.7/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+</head>
+<body>
+  <div class="intro">
+    <div class="intro-text">
+      <h1 class="hide">
+        <span class="text">Understanding Minds</span>
+      </h1>
+      <h1 class="hide">
+        <span class="text">Empowering Lives</span>
+      </h1>
+      <h1 class="hide">
+        <span class="text">Through Psychology</span>
+      </h1>
+    </div>
+  </div>
+  <div class="slider"></div>
+
+  <div class="content">
+    <div id="progress-bar"></div>
+    <header>
+        <nav>
+            <div class="logo">May Lara</div>
+            <div class="nav-links">
+              <a href="#home" class="nav-link">Home</a>
+              <a href="#about" class="nav-link">About</a>
+              <a href="#chatbot" class="nav-link">Terminal</a>
+              <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="glitch" data-text="Mylene De Lara">Mylene De Lara</h1>
+                        <p class="subtitle">Human Resources Manager</p>
+                        <p class="tagline">As a dedicated and experienced Human Resources Manager, I aim to leverage my expertise in recruitment, employee relations, and training to foster a positive and productive work environment. My goal is to implement effective HR strategies that align with organizational goals, enhance employee satisfaction, and drive overall business success.</p>
+                        <br>
+                        <div class="cta-buttons">
+                            <a href="#contact" class="btn primary">Contact Me !</a>
+                            <a href="#" class="btn secondary" id="download-cv">Download CV</a>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.facebook.com/lara.maylene.5" class="social-icon"><i class="fab fa-facebook"></i></a>
+                            <a href="mailto:delaraml@students.nu-dasma.edu.ph" class="social-icon"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <div class="image-wrapper">
+                            <img src="1.jpg" alt="Profile Picture">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>As a psychology graduate passionate about people and organizational development, I now serve as an HR Manager, focusing on talent acquisition, employee engagement, and fostering workplace success for both businesses and individuals.</p>
+                        <div class="stats">
+                            <div class="stat-item" data-modal="education">
+                                <h3>Education</h3>
+                                <p>BS Psychology</p>
+                            </div>
+                            <div class="stat-item" data-modal="experience">
+                                <h3>Experience</h3>
+                                <p>2+ Years</p>
+                            </div>
+                            <div class="stat-item" data-modal="projects">
+                                <h3>Projects</h3>
+                                <p>10+ Complete</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<br>
+<br>
+        <section id="chatbot" class="chatbot">
+          <div class="container">
+            <h2 class="section-title">Chat with My Personal Bot Assistant</h2>
+            <div class="chatbot-description">
+              <p>Feel free to ask me any questions or start a conversation. I'm here to help and provide information about my portfolio and experiences.</P>
+              <p>Here are the commands I can understand:</p>
+            </div>
+            <div class="commands">
+              <div class="commands-grid">
+                <ul class="column">
+                  <li style="color: rgb(213,192,155);">Hello</li>
+                  <li style="color: rgb(213,192,155);">How are you</li>
+                  <li style="color: rgb(213,192,155);">Tell me about yourself</li>
+                  <li style="color: rgb(213,192,155);">Why did you choose psychology</li>
+                  <li style="color: rgb(213,192,155);">What are your strengths</li>
+                  <li style="color: rgb(213,192,155);">What are your weaknesses</li>
+                </ul>
+                <ul class="column">
+                  <li style="color: rgb(213,192,155);">How do you handle stress</li>
+                  <li style="color: rgb(213,192,155);">What experience do you have in psychology</li>
+                  <li style="color: rgb(213,192,155);">Why should we hire you</li>
+                  <li style="color: rgb(213,192,155);">Where do you see yourself in five years</li>
+                  <li style="color: rgb(213,192,155);">How do you handle conflict</li>
+                  <li style="color: rgb(213,192,155);">Bye</li>
+                </ul>
+              </div>
+            </div>
+            <br>
+            <div class="chat-window">
+              <div class="chat-messages" id="chat-messages">
+                <!-- Chat messages will appear here -->
+                <div class="message bot-message">Hi! How can I assist you today?</div>
+              </div>
+              <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Type your message...">
+                <button id="send-button" class="btn primary">Send</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+          <style>
+            .commands-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            }
+            .column {
+            list-style-type: none;
+            padding: 0;
+            }
+            .chat-window {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+            }
+            .chat-messages {
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            }
+            .chat-input {
+            display: flex;
+            }
+            .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-right: none;
+            }
+            .chat-input button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            }
+            .message {
+            margin-bottom: 10px;
+            }
+            .bot-message {
+            color: rgb(213,192,155);
+            }
+          </style>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Contact Me</h2>
+                <div class="contact-content">
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" required>
+                            <label for="name">Your Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" required>
+                            <label for="email">Your Email</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" required></textarea>
+                            <label for="message">Your Message</label>
+                        </div>
+                        <button type="submit" class="btn primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Mylene De Lara. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <div id="modal-container" class="modal-container"></div>
+    <div class="modal-overlay" id="education-modal">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h3>Education</h3>
+            </div>
+            <div class="modal-content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2027 - 2028</div>
+                        <h4 class="timeline-title">Bachelor of Science in Psychology</h4>
+                        <p class="timeline-description">National University Dasma</p>
+                        <ul class="timeline-details">
+                            <li>GPA: 3.2/4.0</li>
+                            <li>Major: Industrial Organizational Psychology</li>
+                            <li>Minor: Research Methods</li>
+                            <li>Thesis: "Navigating Gender Role and Traditional Expectations: Understanding the Lived Experience of Filipino Mothers as the Primary Caregiver and Homemakers"</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025</div>
+                        <h4 class="timeline-title">TOEIC Certification</h4>
+                        <p class="timeline-description">Advanced Statistical Analysis in Psychology</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="experience-modal">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h3>Experience</h3>
+            </div>
+            <div class="modal-content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025 - Present</div>
+                        <h4 class="timeline-title">Human Resources Manager</h4>
+                        <p class="timeline-description">Industrial Oragnization Psychologist</p>
+                        <ul class="timeline-details">
+                            <li>Finding and bringing in new employees</li>
+                            <li>Handling workplace issues and ensuring a positive work environment</li>
+                            <li>Organizing training programs to help employees grow</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023 - 2024</div>
+                        <h4 class="timeline-title">Psychology Intern</h4>
+                        <p class="timeline-description">Mental Health Clinic</p>
+                        <ul class="timeline-details">
+                            <li>Assisted in patient assessments</li>
+                            <li>Participated in group therapy sessions</li>
+                            <li>Developed treatment plans</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="projects-modal">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h3>Projects</h3>
+            </div>
+            <div class="modal-content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025</div>
+                        <h4 class="timeline-title">Navigating Gender Role and Traditional Expectations: Understanding the Lived Experience of Filipino Mothers as the Primary Caregiver and Homemakers</h4>
+                        <p class="timeline-description">A study in Filipino Psychology aimed at exploring the experiences of Filipino mothers who serve as the main caregivers and homemakers.</p>
+                        <ul class="timeline-details">
+                            <li>Created educational materials</li>
+                            <li>Reached 100+ individuals</li>
+                            <li>Analyze data and write the report</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025</div>
+                        <h4 class="timeline-title">A Correlational Study on the Relationship Between Continuous Glucose Monitor (CGM) Usage and Anxiety Levels Among Diabetic Patients in Dasmariñas, Cavite</h4>
+                        <p class="timeline-description">How a Continuous Glucose Monitor (CGM) can increase anxiety for diabetic patients by providing constant updates on glucose levels, which may lead to stress over fluctuations and the need for immediate action.                        </p>
+                        <ul class="timeline-details">
+                            <li>Surveyed 500 diabetic patients using CGMs</li>
+                            <li>Published findings on CGM usage and anxiety in a psychology journal</li>
+                            <li>Presented results at a national conference</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
