@@ -583,6 +583,7 @@ footer {
   visibility: hidden;
   transition: all 0.3s ease;
   z-index: 1000;
+  overflow-y: auto;
 }
 
 .modal-overlay.active {
@@ -601,6 +602,7 @@ footer {
   opacity: 0;
   transition: all 0.3s ease;
   border: 2px solid var(--primary-color);
+  overflow-y: auto;
 }
 
 .modal-overlay.active .modal {
