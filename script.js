@@ -240,43 +240,40 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Contact form submission
-  const contactForm = document.getElementById('contact-form');
-  contactForm.addEventListener('submit', (e) => {
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(contactForm);
     const name = formData.get('name').trim();
     const email = formData.get('email').trim();
     const message = formData.get('message').trim();
-
     // Basic validation
     if (!name || !email || !message) {
       alert('Please fill in all fields.');
       return;
     }
-
     // Email format validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
       alert('Please enter a valid email address.');
       return;
     }
-
     // Send form data to email
     fetch('https://formsubmit.co/ajax/yvesdesantos01@gmail.com', {
       method: 'POST',
       headers: { 
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
       body: JSON.stringify({
-    name: name,
-    email: email,
-    message: message
+        name: name,
+        email: email,
+        message: message
       })
     })
     .then(response => {
       if (!response.ok) {
-    throw new Error('Network response was not ok');
+        throw new Error('Network response was not ok');
       }
       return response.json();
     })
@@ -289,7 +286,6 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error('Error:', error);
       alert('There was an error sending your message.');
     });
-  });
 
   // Download CV button 
   document.getElementById('download-cv').addEventListener('click', (e) => {
@@ -317,4 +313,5 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   window.addEventListener('scroll', reveal);
+});
 });
