@@ -252,14 +252,8 @@ document.addEventListener('DOMContentLoaded', function() {
       alert('Please fill in all fields.');
       return;
     }
-    // Email format validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      alert('Please enter a valid email address.');
-      return;
-    }
     // Send form data to email
-    fetch('https://formsubmit.co/ajax/mhaylara2@gmail.com', {
+    fetch('https://formsubmit.co/ajax/1c7ad56341ef271b05cfe54dca751706', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
