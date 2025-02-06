@@ -23,7 +23,7 @@
 
   .intro-text {
     color: rgb(213, 192, 155);
-    font-size: 3rem;
+    font-size: 2.5rem;
     text-align: center;
   }
 
@@ -35,6 +35,12 @@
   .hide span {
     transform: translateY(100%);
     display: inline-block;
+  }
+
+  @media screen and (max-width: 768px) {
+    .hide span {
+      font-size: 45px; /* Adjust the font size for mobile view */
+    }
   }
 
   .slider {

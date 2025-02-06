@@ -243,16 +243,64 @@ document.addEventListener('DOMContentLoaded', function() {
   const contactForm = document.getElementById('contact-form');
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    // Add your form submission logic here
-    alert('Message sent successfully!');
-    contactForm.reset();
+    const formData = new FormData(contactForm);
+    const name = formData.get('name').trim();
+    const email = formData.get('email').trim();
+    const message = formData.get('message').trim();
+
+    // Basic validation
+    if (!name || !email || !message) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    // Email format validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    // Send form data to email
+    fetch('https://formsubmit.co/ajax/yvesdesantos01@gmail.com', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        message: message
+      })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      alert('Message sent successfully!');
+      contactForm.reset();
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('There was an error sending your message.');
+    });
   });
 
   // Download CV button 
   document.getElementById('download-cv').addEventListener('click', (e) => {
     e.preventDefault();
-    // Add your CV download logic here
-    alert('CV download started!');
+    // Trigger the download of the CV
+    const link = document.createElement('a');
+    link.href = '\DELARA_CV.pdf'; // Update with the correct path to your resume file
+    link.download = 'DELARA_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   });
 
   // Reveal animations on scroll
