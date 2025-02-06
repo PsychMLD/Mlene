@@ -200,52 +200,60 @@ document.addEventListener('DOMContentLoaded', function() {
 
   window.addEventListener('scroll', reveal);
 
-  // Modal handling
   const modalOverlays = document.querySelectorAll('.modal-overlay');
-  const statItems = document.querySelectorAll('.stat-item');
-  const modalCloseButtons = document.querySelectorAll('.modal-close');
+const statItems = document.querySelectorAll('.stat-item');
+const modalCloseButtons = document.querySelectorAll('.modal-close');
+const progressBar = document.getElementById('progress-bar');
 
-  // Open modal
-  statItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const modalType = item.getAttribute('data-modal');
-      const modal = document.getElementById(`${modalType}-modal`);
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
-    });
+// Open modal
+statItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const modalType = item.getAttribute('data-modal');
+    const modal = document.getElementById(`${modalType}-modal`);
+    
+    // Calculate the scroll position using the progress bar width
+    const scrollPercentage = parseFloat(progressBar.style.width) || 0;
+    const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollOffset = (scrollPercentage / 100) * documentHeight; // Calculate offset based on progress bar width
+    
+    modal.classList.add('active');
+    modal.style.top = `${scrollOffset}px`; // Position the modal at the current scroll position
+    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
   });
+});
 
-  // Close modal functions
-  function closeModal(modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = ''; // Restore scrolling
-  }
+// Close modal functions
+function closeModal(modal) {
+  modal.classList.remove('active');
+  document.body.style.overflow = ''; // Restore scrolling
+}
 
-  // Close with close button
-  modalCloseButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const modal = button.closest('.modal-overlay');
-      closeModal(modal);
-    });
+// Close with close button
+modalCloseButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const modal = button.closest('.modal-overlay');
+    closeModal(modal);
   });
+});
 
-  // Close with overlay click
-  modalOverlays.forEach(overlay => {
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        closeModal(overlay);
-      }
-    });
-  });
-
-  // Close with Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      modalOverlays.forEach(modal => {
-        if (modal.classList.contains('active')) {
-          closeModal(modal);
-        }
-      });
+// Close with overlay click
+modalOverlays.forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      closeModal(overlay);
     }
   });
 });
+
+// Close with Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    modalOverlays.forEach(modal => {
+      if (modal.classList.contains('active')) {
+        closeModal(modal);
+      }
+    });
+  }
+});
+
+});  
