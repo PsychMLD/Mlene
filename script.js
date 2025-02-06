@@ -6,7 +6,6 @@ setTimeout(() => {
   document.body.style.overflow = ''; // Restore scrolling after intro animation
 }, 4500); // Adjust time according to the length of your animation
 
-
 document.addEventListener('DOMContentLoaded', () => {
   const intro = document.querySelector('.intro');
   const introText = document.querySelectorAll('.intro-text h1');
@@ -37,15 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
     "how are you": "I'm doing great, thank you! Excited for this conversation.",
     "bye": "Goodbye! Thank you for your time. I hope to stay in touch!",
     "thank you": "You're welcome! I appreciate the opportunity to speak with you.",
-    "tell me about yourself": "I'm a recent psychology graduate with a strong interest in [mention areas of interest, e.g., clinical psychology, organizational psychology, research]. I have experience in [mention internships, projects, or relevant coursework], and I'm eager to apply my knowledge in a professional setting.",
-    "why did you choose psychology": "I've always been fascinated by human behavior and mental processes. I chose psychology because I wanted to understand how people think, feel, and behave, and to contribute to improving mental well-being and workplace dynamics.",
-    "what are your strengths": "I have strong analytical and problem-solving skills, excellent communication abilities, and a deep understanding of psychological principles. I'm also empathetic and skilled at building rapport with others, which is valuable in psychology-related roles.",
-    "what are your weaknesses": "One area I’ve been working on is [mention a real but improvable weakness, e.g., public speaking or handling large datasets]. However, I actively seek opportunities to improve through [mention strategies like practice, coursework, or mentorship].",
-    "how do you handle stress": "I use a combination of time management, mindfulness, and self-care techniques to manage stress effectively. Understanding psychological coping mechanisms also helps me stay resilient under pressure.",
-    "what experience do you have in psychology": "During my studies, I gained experience through [internships, research projects, volunteer work, etc.]. I worked on [mention a specific project or experience] that enhanced my skills in [assessment, counseling, data analysis, etc.].",
-    "why should we hire you": "I bring a strong foundation in psychology, a passion for applying psychological principles in real-world settings, and the ability to adapt and learn quickly. I’m eager to contribute my skills in [mention relevant job role or industry].",
-    "where do you see yourself in five years": "I see myself growing professionally in a role that allows me to apply psychology to help individuals or organizations. I hope to gain expertise in [specific field, e.g., HR, mental health counseling, research] and contribute meaningfully to the field.",
-    "how do you handle conflict": "I approach conflict with active listening and problem-solving. I try to understand all perspectives and work toward a solution that benefits everyone involved. My psychology background helps me navigate interpersonal challenges effectively.",
     "default": "I'm not sure I understand. Could you please rephrase?"
   };
 
@@ -110,21 +100,84 @@ document.addEventListener('DOMContentLoaded', function() {
     },
   });
 
-  // Progress bar
-  // Function to update the vertical progress bar as the user scrolls
-function updateProgressBar() {
-  const progressBar = document.getElementById('progress-bar');
-  const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  const scrollPercentage = (scrollTop / documentHeight) * 100;
+  let lastScrollTop = 0;
 
-  // Set the height of the progress bar based on scroll percentage
-  progressBar.style.height = `${scrollPercentage}%`;
-}
+  // Function to update the progress bar
+  function updateProgressBar() {
+    const progressBar = document.getElementById('progress-bar');
+    const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Calculate the scroll percentage
+    const scrollPercentage = (scrollTop / documentHeight) * 100;
 
-// Update progress bar on scroll
-window.addEventListener('scroll', updateProgressBar);
+    // Update the progress bar height based on scroll percentage
+    progressBar.style.height = `${Math.min(scrollPercentage, 100)}%`;
+    
+    // Store the scroll position to preserve state when modal opens
+    lastScrollTop = scrollTop;
+  }
 
+  // Update progress bar on scroll
+  window.addEventListener('scroll', updateProgressBar);
+
+  // Function to open the modal and maintain scroll position
+  function openModal(modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling while modal is open
+    modal.style.top = `${window.scrollY + window.innerHeight / 2 - modal.offsetHeight / 2}px`; // Center the modal vertically in the viewport
+  }
+
+  // Function to close the modal
+  function closeModal(modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+  }
+
+  // Example to handle modal open/close
+  const modalOverlays = document.querySelectorAll('.modal-overlay');
+  const modalCloseButtons = document.querySelectorAll('.modal-close');
+
+  // Open with some trigger
+  document.querySelectorAll('.stat-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const modalType = item.getAttribute('data-modal');
+      const modal = document.getElementById(`${modalType}-modal`);
+
+      // Check if modal is not already active (if so, do nothing)
+      if (!modal.classList.contains('active')) {
+        openModal(modal);
+      }
+    });
+  });
+
+  // Close with close button
+  modalCloseButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const modal = button.closest('.modal-overlay');
+      closeModal(modal);
+    });
+  });
+
+  // Close with overlay click
+  modalOverlays.forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        closeModal(overlay);
+      }
+    });
+  });
+
+  // Close with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      modalOverlays.forEach(modal => {
+        if (modal.classList.contains('active')) {
+          closeModal(modal);
+        }
+      });
+    }
+  });
 
   // Mobile menu toggle
   const hamburger = document.querySelector('.hamburger');
@@ -216,61 +269,4 @@ window.addEventListener('scroll', updateProgressBar);
   };
 
   window.addEventListener('scroll', reveal);
-
-  const modalOverlays = document.querySelectorAll('.modal-overlay');
-const statItems = document.querySelectorAll('.stat-item');
-const modalCloseButtons = document.querySelectorAll('.modal-close');
-const progressBar = document.getElementById('progress-bar');
-
-// Open modal
-statItems.forEach(item => {
-  item.addEventListener('click', () => {
-    const modalType = item.getAttribute('data-modal');
-    const modal = document.getElementById(`${modalType}-modal`);
-    
-    // Calculate the scroll position using the progress bar width
-    const scrollPercentage = parseFloat(progressBar.style.width) || 0;
-    const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollOffset = (scrollPercentage / 100) * documentHeight; // Calculate offset based on progress bar width
-    
-    modal.classList.add('active');
-    modal.style.top = `${scrollOffset}px`; // Position the modal at the current scroll position
-    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
-  });
 });
-
-// Close modal functions
-function closeModal(modal) {
-  modal.classList.remove('active');
-  document.body.style.overflow = ''; // Restore scrolling
-}
-
-// Close with close button
-modalCloseButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const modal = button.closest('.modal-overlay');
-    closeModal(modal);
-  });
-});
-
-// Close with overlay click
-modalOverlays.forEach(overlay => {
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) {
-      closeModal(overlay);
-    }
-  });
-});
-
-// Close with Escape key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    modalOverlays.forEach(modal => {
-      if (modal.classList.contains('active')) {
-        closeModal(modal);
-      }
-    });
-  }
-});
-
-});  
