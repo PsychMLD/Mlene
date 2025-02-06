@@ -265,18 +265,18 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('https://formsubmit.co/ajax/yvesdesantos01@gmail.com', {
       method: 'POST',
       headers: { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
       },
       body: JSON.stringify({
-        name: name,
-        email: email,
-        message: message
+    name: name,
+    email: email,
+    message: message
       })
     })
     .then(response => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+    throw new Error('Network response was not ok');
       }
       return response.json();
     })
