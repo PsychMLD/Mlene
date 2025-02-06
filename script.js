@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     // Send form data to email
-    fetch('https://formsubmit.co/ajax/mhaylara2@gmail.com', {
+    fetch('https://formsubmit.co/ajax/1c7ad56341ef271b05cfe54dca751706', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
