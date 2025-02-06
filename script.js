@@ -1,3 +1,12 @@
+// Disable scrolling during the intro animation
+document.body.style.overflow = 'hidden';
+
+// Assuming your animation takes 3 seconds, set a timeout to re-enable scrolling after that
+setTimeout(() => {
+  document.body.style.overflow = ''; // Restore scrolling after intro animation
+}, 4500); // Adjust time according to the length of your animation
+
+
 document.addEventListener('DOMContentLoaded', () => {
   const intro = document.querySelector('.intro');
   const introText = document.querySelectorAll('.intro-text h1');
@@ -102,12 +111,20 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Progress bar
-  window.addEventListener('scroll', () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    document.getElementById('progress-bar').style.width = scrolled + '%';
-  });
+  // Function to update the vertical progress bar as the user scrolls
+function updateProgressBar() {
+  const progressBar = document.getElementById('progress-bar');
+  const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const scrollPercentage = (scrollTop / documentHeight) * 100;
+
+  // Set the height of the progress bar based on scroll percentage
+  progressBar.style.height = `${scrollPercentage}%`;
+}
+
+// Update progress bar on scroll
+window.addEventListener('scroll', updateProgressBar);
+
 
   // Mobile menu toggle
   const hamburger = document.querySelector('.hamburger');

@@ -153,12 +153,71 @@ body {
 #progress-bar {
   position: fixed;
   top: 0;
-  left: 0;
-  height: 3px;
-  background: var(--primary-color);
+  left: 0; /* Align the progress bar to the left side */
+  width: 3px; /* Keep the same thin width */
+  height: 0%; /* Start with 0% height */
+  background: rgb(213, 192, 155); /* Light Gold Fill */
   z-index: 1000;
-  transition: width 0.3s ease;
+  transition: height 0.3s ease; /* Smooth transition for height change */
+  border-radius: 50px; /* Rounded edges for a smoother appearance */
 }
+
+/* Circular endpoints at top and bottom */
+#progress-bar::before,
+#progress-bar::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: rgb(213, 192, 155); /* Light Gold color */
+  border-radius: 50%; /* Circular shape */
+  transition: transform 0.3s ease;
+}
+
+#progress-bar::before {
+  top: -6px; /* Position the top circle at the very top */
+  left: -4px; /* Center it horizontally with the bar */
+}
+
+#progress-bar::after {
+  bottom: -6px; /* Position the bottom circle at the very bottom */
+  left: -4px; /* Center it horizontally with the bar */
+}
+
+/* Style for the circular page indicators */
+.page-indicator {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: rgb(213, 192, 155); /* Light Gold color */
+  border-radius: 50%; /* Circular shape */
+  transition: transform 0.3s ease;
+}
+
+.page-indicator.left {
+  left: 0; /* Position it on the left */
+  top: 50%; /* Center it vertically */
+  transform: translateY(-50%); /* Adjust for precise centering */
+}
+
+.page-indicator.right {
+  right: 0; /* Position it on the right */
+  top: 50%; /* Center it vertically */
+  transform: translateY(-50%); /* Adjust for precise centering */
+}
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 768px) {
+  #progress-bar {
+    width: 2px; /* Slightly thinner on smaller screens */
+  }
+
+  .page-indicator {
+    width: 10px; /* Smaller circles on mobile */
+    height: 10px;
+  }
+}
+
 
 /* Navigation */
 header {
